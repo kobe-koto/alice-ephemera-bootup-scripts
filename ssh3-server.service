@@ -1,0 +1,23 @@
+[Unit]
+Description=SSH3 server (ssh3-server)
+Documentation=https://github.com/francoismichel/ssh3
+After=network-online.target
+Wants=network-online.target
+ConditionPathExists=/usr/local/bin/ssh3-server
+
+[Service]
+Type=simple
+User=root
+Group=root
+ExecStart=/usr/local/bin/ssh3-server -cert /etc/ssh3/cert/cert.pem -key /etc/ssh3/cert/priv.key -bind [::]:44353
+Restart=on-failure
+RestartSec=5s
+TimeoutStartSec=10s
+TimeoutStopSec=20s
+KillMode=process
+LimitNOFILE=65536
+RuntimeDirectory=ssh3-server
+RuntimeDirectoryMode=0750
+
+[Install]
+WantedBy=multi-user.target
