@@ -3,6 +3,9 @@
 # update database
 apt-get update
 
+# setup timesyncd 
+apt install -y systemd-timesyncd
+
 # install sth
 apt install -y mosh git unzip jq sudo 
 
